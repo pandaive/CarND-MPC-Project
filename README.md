@@ -9,14 +9,14 @@ This is my solution to the Model Predictive Control Project.
 ### The model
 The model was designed following the instructions in classes, mostly following quizzes and what was described in project Q&A. It's following kinematic model of the vehicle's mobility, including vehicle's position (x and y), angle (psi), velocity (v), cross-track error (cte) and psi error (epsi) and actuators - steering angle (delta) and acceleration (a).
 Update equations are:
-```
+
 x<sub>t+1</sub> = x<sub>t</sub>  + v0 * CppAD::cos(psi0) * dt;
 y_t+1 = y_t  + v0 * CppAD::sin(psi0) * dt;
 psi_t+1 = psi_t  - v0 * delta0/Lf * dt;
 v_t+1 = v_t  + a0 * dt);
 cte_t+1 = (f0 - y0) + (v0 * CppAD::sin(epsi0) * dt);
 epsi_t+1 = (psi0 - psides0) + v0 * delta0 / Lf * dt;
-```
+
 
 
 
