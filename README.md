@@ -20,12 +20,25 @@ v<sub>t+1</sub> = v<sub>t</sub>  + a<sub>t</sub> * dt
 
 cte<sub>t+1</sub> = (f<sub>t</sub> - y<sub>t</sub>) + v<sub>t</sub> * sin(epsi<sub>t</sub>) * dt
 
-epsi<sub>t+1</sub> = (psi<sub>t</sub> - psi<sub>des<sub>t</sub></sub>) + v<sub>t</sub> * delta<sub>t</sub>/L<sub>t</sub> * dt
+epsi<sub>t+1</sub> = (psi<sub>t</sub> - psi<sub>des<sub>t</sub></sub>) + v<sub>t</sub> * delta<sub>t</sub>/L<sub>f</sub> * dt
 
 
 where psi<sub>des</sub> is desired psi value.
 
+Another important factor is the cost value. The way I adjusted this can be found in MPC.cpp in lines 52-68. When taking a steering into account, I multiply the cost value by the velocity. So bigger the velocity and steering, higher the cost is. This results in vehicle slowing down when taking the curve what is the normal behavior of human driver and makes it safe. In the simulation it protects the vehicle from falling of the road and taking the curve slowly and carefully.
 
+### Timestep Length and Elapsed Duration (N & dt)
+
+The values I chosed are N = 10 and dt = 0.1. Those were initial values that were shared on the Q&A session. I found out that smaller N (like 8 or 5) causes the vehicle to miss future trajectory, while higher N (like 20 or 25) makes it loose the way as it tries to see too much and adapt to it. Smaller dt values (like 0.05) turned out to make a model too slow while higher values (like 1 or 5) made the movement much less stable with a result of vehicle loosing its way.
+
+### Polynomial Fitting and MPC Preprocessing
+
+Before polynomial fitting and MPC processing, waypoints are shifted so they reflect the vehicle's coordinate system.
+Initial state values passed to MPC are: 0, 0, 0, current speed, current cross track error, current psi error (x, y, psi, v, cte, epsi).
+
+### Model Predictive Control with Latency
+
+The way to deal with latency was discussed during the Q&A session and that's how I implemented it. The values are counted starting from one step forward, adjusted by current readings.
 
 
 
