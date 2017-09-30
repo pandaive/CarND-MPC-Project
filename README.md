@@ -16,11 +16,11 @@ y<sub>t+1</sub> = y<sub>t</sub> + v<sub>t</sub> * sin(psi<sub>t</sub>) * dt
 
 psi<sub>t+1</sub> = psi<sub>t</sub> - v<sub>t</sub> * delta<sub>t</sub>/L<sub>f</sub> * dt
 
-v<sub>t+1</sub> = v<sub>t</sub>  + a<sub>t</sub> * dt)
+v<sub>t+1</sub> = v<sub>t</sub>  + a<sub>t</sub> * dt
 
-cte<sub>t+1</sub> = (f<sub>t</sub> - y<sub>t</sub>) + (v<sub>t</sub> * sin(epsi<sub>t</sub>) * dt)
+cte<sub>t+1</sub> = (f<sub>t</sub> - y<sub>t</sub>) + v<sub>t</sub> * sin(epsi<sub>t</sub>) * dt
 
-epsi<sub>t+1</sub> = (psi<sub>t</sub> - psi<sub>des<sub>t</sub></sub>) + v<sub>t</sub> * delta<sub>t<sub>/L<sub>t</sub> * dt
+epsi<sub>t+1</sub> = (psi<sub>t</sub> - psi<sub>des<sub>t</sub></sub>) + v<sub>t</sub> * delta<sub>t</sub>/L<sub>t</sub> * dt
 
 
 where psi<sub>des</sub> is desired psi value.
