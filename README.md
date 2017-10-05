@@ -34,7 +34,7 @@ The values I chosed are N = 10 and dt = 0.1. Those were initial values that were
 ### Polynomial Fitting and MPC Preprocessing
 
 Before polynomial fitting and MPC processing, waypoints are shifted so they reflect the vehicle's coordinate system.
-Initial state values passed to MPC are: 0, 0, 0, current speed, current cross track error, current psi error (x, y, psi, v, cte, epsi).
+Initial state values are: 0, 0, 0, current speed, current cross track error, current psi error (x, y, psi, v, cte, epsi). They are used to calculate predicted next state (see next part) which is then passed to MPC as current values.
 
 ### Model Predictive Control with Latency
 
