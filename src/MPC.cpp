@@ -20,7 +20,7 @@ double dt = 0.1;
 //
 // This is the length from front to CoG that has a similar radius.
 const double Lf = 2.67;
-double ref_v = 100;
+double ref_v = 110;
 
 size_t x_start = 0;
 size_t y_start = x_start + N;
@@ -50,7 +50,7 @@ class FG_eval {
     
     // Reference State Cost
     for (unsigned int t = 0; t < N; t++) {
-      fg[0] += 500*CppAD::pow(vars[cte_start + t], 2);
+      fg[0] += 1000*CppAD::pow(vars[cte_start + t], 2);
       fg[0] += 1000*CppAD::pow(vars[epsi_start + t], 2);
       fg[0] += CppAD::pow(vars[v_start + t] - ref_v, 2);
     }
@@ -119,7 +119,6 @@ MPC::~MPC() {}
 
 vector<double> MPC::Solve(Eigen::VectorXd state, Eigen::VectorXd coeffs) {
   bool ok = true;
-  size_t i;
   typedef CPPAD_TESTVECTOR(double) Dvector;
 
   double x = state[0];

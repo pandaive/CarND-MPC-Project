@@ -16,7 +16,7 @@ using json = nlohmann::json;
 constexpr double pi() { return M_PI; }
 double deg2rad(double x) { return x * pi() / 180; }
 double rad2deg(double x) { return x * 180 / pi(); }
-
+const double Lf = 2.67;
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
 // else the empty string "" will be returned.
@@ -124,7 +124,17 @@ int main() {
           throttle_value = j[1]["throttle"];
 
           Eigen::VectorXd state(6);
-          state << 0, 0, 0, v, cte, epsi;
+
+          //handling 100ms delay
+          double delay = 100.0 / 1000.0; // in ms
+          double x = v * delay; //0 + v * cos(0) * delay;
+          double y = 0; //0 + v * sin(0) * delay;
+          double psi_new = -v * steer_value/Lf * delay; //0 - (v * steer_value/Lf * delay);
+          double v_new = v + throttle_value * delay;
+          cte = cte + (v * sin(epsi) * delay);
+          epsi = epsi + (v * steer_value/Lf * delay);
+
+          state << x, y, psi_new, v_new, cte, epsi;
 
           auto vars = mpc.Solve(state, coeffs);
 

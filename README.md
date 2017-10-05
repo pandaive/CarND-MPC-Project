@@ -29,7 +29,7 @@ Another important factor is the cost value. The way I adjusted this can be found
 
 ### Timestep Length and Elapsed Duration (N & dt)
 
-The values I chosed are N = 10 and dt = 0.1. Those were initial values that were shared on the Q&A session. I found out that smaller N (like 8 or 5) causes the vehicle to miss future trajectory, while higher N (like 20 or 25) makes it loose the way as it tries to see too much and adapt to it. Smaller dt values (like 0.05) turned out to make a model too slow while higher values (like 1 or 5) made the movement much less stable with a result of vehicle loosing its way.
+The values I chosed are N = 10 and dt = 0.1. Those were initial values that were shared on the Q&A session. I found out that smaller N (like 8 or 5) causes the vehicle to miss future trajectory, while higher N (like 20 or 25) makes it loose the way as it tries to see too much and adapt to it. It also causes that the model needs more computational time to be processed. Smaller dt values (like 0.05) though result in finer resolution, turned out to make a model too slow while higher values (like 1 or 5) made the movement much less stable with a result of vehicle loosing its way.
 
 ### Polynomial Fitting and MPC Preprocessing
 
@@ -38,7 +38,7 @@ Initial state values passed to MPC are: 0, 0, 0, current speed, current cross tr
 
 ### Model Predictive Control with Latency
 
-The way to deal with latency was discussed during the Q&A session and that's how I implemented it. The values are counted starting from one step forward, adjusted by current readings.
+The latency of 100ms given in the project I handle using kinematic equations to predict the state of the vehicle after this 100ms. It means that even though there is a latency, given output is up to date according to prediction. I calculate the predicted step after polynomial fitting using vehicle map coordinate.
 
 
 
